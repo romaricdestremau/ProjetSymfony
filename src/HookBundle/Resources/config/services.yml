@@ -1,6 +1,6 @@
 services:
     hook.twig.extension:
         class: HookBundle\Twig\HookExtension
-        arguments: ["@doctrine.orm.entity_manager","@module.manager"]
+        arguments: ["@module.manager"]
         tags:
             - { name: twig.extension }

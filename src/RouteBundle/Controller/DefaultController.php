@@ -17,7 +17,7 @@ class DefaultController extends Controller
      */
     public function frontAction()
     {
-        // @todo Make routes
+        // @Todo Make routes
         //       Set front_category route to be /category/[slug]
         //       Set front_article  route to be /category/[category]/article/[slug]
         //       Set front_search   route to be /search
@@ -28,13 +28,13 @@ class DefaultController extends Controller
 
     /**
      * @Route("/admin", name="admin_home")
-     * @Route("/", name="admin_settings")
-     * @Route("/", name="admin_modules")
-     * @Route("/", name="admin_content")
+     * @Route("/admin/settings/{options}", name="admin_settings")
+     * @Route("/admin/modules/{options}", name="admin_modules")
+     * @Route("/admin/content/{options}", name="admin_content")
      */
-    public function adminAction()
+    public function adminAction($options = null)
     {
-        // @todo Make routes
+        // @Todo Make routes
         //       Set admin_settings route to be /admin/settings/[options] with [options] set to null by default
         //       Set admin_modules  route to be /admin/modules/[options]  with [options] set to null by default
         //       Set admin_content  route to be /admin/content/[options]  with [options] set to null by default

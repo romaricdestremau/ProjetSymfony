@@ -13,7 +13,7 @@ class HookExtension extends Twig_Extension
     private $em;
     private $mm;
 
-    // @todo Inject the entity manager from the services.yml file
+    // @Todo Inject the entity manager from the services.yml file
     public function __construct(EntityManager $em, ModuleManager $mm)
     {
         $this->em = $em;

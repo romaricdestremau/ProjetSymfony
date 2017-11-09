@@ -67,19 +67,12 @@ class ModuleManager
      */
     public function activate($module_name)
     {
-        // @todo Make the activate method
+        // @Todo Make the activate method
         //       Find the module and update its value
-        $module = $em->getRepository(Module::class)->find($module_name);
-        if (!$module) {
-            throw $this->createNotFoundException(
-                'No module found for module'.$module_name
-            );
-        }
-
-        $module->setActive(1);
-        $em->flush();
-
-        return true;
+        /** @var Module $module */
+        $module = $this->em->getRepository(Module::class)->findOneBy(array('name' => $module_name));
+        $module->setActive(true);
+        $this->em->flush();
     }
 
     /**
@@ -90,19 +83,12 @@ class ModuleManager
      */
     public function deactivate($module_name)
     {
-        // @todo Make the deactivate method
+        // @Todo Make the deactivate method
         //       Find the module and update its value
-        $module = $em->getRepository(Module::class)->find($module_name);
-        if (!$module) {
-            throw $this->createNotFoundException(
-                'No module found for module'.$module_name
-            );
-        }
-
-        $module->setActive(0);
-        $em->flush();
-
-        return true;
+        /** @var Module $module */
+        $module = $this->em->getRepository(Module::class)->findOneBy(array('name' => $module_name));
+        $module->setActive(false);
+        $this->em->flush();
     }
 
     public function install($module_name)

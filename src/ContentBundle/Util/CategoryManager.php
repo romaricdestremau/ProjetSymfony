@@ -31,8 +31,14 @@ class CategoryManager
         $name,
         $parentId = NULL
     ) {
-        // @todo Make the create method
+        // @Todo Make the create method
         //       Create a new category
+        $category = new Category();
+        $category->setName($name);
+        $category->setParentId($parentId);
+
+        $this->em->persist($category);
+        $this->em->flush();
     }
 
     public function update($category)
@@ -47,8 +53,14 @@ class CategoryManager
      */
     public function get($id = NULL)
     {
-        // @todo Make the get method
+        // @Todo Make the get method
         //       Find a category from ID or if no ID find all categories, then return
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
+        if (!$category) {
+            $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
+            return $category;
+        }
+        return $category;
     }
 
     /**
@@ -59,7 +71,9 @@ class CategoryManager
      */
     public function delete($id)
     {
-        // @todo Make the create method
+        // @Todo Make the create method
         //       Find the category and delete it
+        $em->remove($id);
+        $em->flush();
     }
 }

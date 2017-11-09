@@ -1,6 +1,7 @@
 <?php
 namespace ContentBundle\Util;
 
+use ContentBundle\Entity\Category;
 use FOS\UserBundle\Doctrine\UserManager as FOSUserManager;
 use ContentBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
@@ -38,13 +39,23 @@ class UserManager
         $roles = array(),
         $enabled = false
     ) {
-        // @todo Make the create method
+        // @Todo Make the create method
         //       Create a user using the FOSUserManager ($this->um)
+        $user = new User();
+        $user->setUsername($username);
+        $user->setEmail($email);
+        $user->setPlainPassword($plain_password);
+        $user->setRoles($roles);
+        $user->setEnabled($enabled);
+
+        $this->em->persist($user);
+        $this->em->flush();
+
     }
 
     public function update($user)
     {
-        $this->um->updateUser($user);
+        $this->em->updateUser($user);
     }
 
     /**
@@ -54,8 +65,14 @@ class UserManager
      */
     public function get($id = NULL)
     {
-        // @todo Make the get method
+        // @Todo Make the get method
         //       Find a user from ID or get all users, then return
+        $user = $this->getDoctrine()->getRepository(Category::class)->find($id);
+        if (!$user) {
+            $user = $this->getDoctrine()->getRepository(Category::class)->findAll();
+            return $user;
+        }
+        return $user;
     }
 
     public function getCurrent()
@@ -70,7 +87,9 @@ class UserManager
      */
     public function delete($id)
     {
-        // @todo Make the delete method
+        // @Todo Make the delete method
         //       Delete a user
+        $em->remove($id);
+        $em->flush();
     }
 }

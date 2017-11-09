@@ -67,9 +67,10 @@ class UserManager
     {
         // @Todo Make the get method
         //       Find a user from ID or get all users, then return
-        $user = $this->getDoctrine()->getRepository(Category::class)->find($id);
+        /** @var User $user */
+        $user = $this->em->getRepository(User::class)->find($id);
         if (!$user) {
-            $user = $this->getDoctrine()->getRepository(Category::class)->findAll();
+            $user = $this->em->getRepository(User::class)->findAll();
             return $user;
         }
         return $user;
@@ -89,7 +90,8 @@ class UserManager
     {
         // @Todo Make the delete method
         //       Delete a user
-        $em->remove($id);
-        $em->flush();
+        $user = $this->em->getRepository(User::class)->find($id);
+        $this->em->remove($user);
+        $this->em->flush();
     }
 }

@@ -41,7 +41,7 @@ class ArticleManager
         $article->setName($name);
         $article->setCover($cover);
         $article->setText($text);
-        $article->setCategoryId($categoryId);
+        $article->setCategoryId($category_id);
 
         $this->em->persist($article);
         $this->em->flush();
@@ -61,11 +61,11 @@ class ArticleManager
     {
         // @Todo Make the get method
         //       Find an article from ID or if no ID find all articles, then return
-        $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
+        /** @var Article $article */
+        $article = $this->em->getRepository(Article::class)->find($id);
         if (!$article) {
-          //$msg = 'No product found for id '.$productId. '. Here are all the articles. \n';
-          $article = $this->getDoctrine()->getRepository(Article::class)->findAll();
-          return $article;
+            $article = $this->em->getRepository(Article::class)->findAll();
+            return $article;
         }
         return $article;
     }
@@ -79,7 +79,8 @@ class ArticleManager
     {
         // @Todo Make the delete method
         //       Find the article and delete it
-        $em->remove($id);
-        $em->flush();
+        $article = $this->em->getRepository(Article::class)->find($id);
+        $this->em->remove($article);
+        $this->em->flush();
     }
 }

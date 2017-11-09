@@ -55,9 +55,10 @@ class CategoryManager
     {
         // @Todo Make the get method
         //       Find a category from ID or if no ID find all categories, then return
-        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
+        /** @var Category $category */
+        $category = $this->em->getRepository(Category::class)->find($id);
         if (!$category) {
-            $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
+            $category = $this->em->getRepository(Category::class)->findAll();
             return $category;
         }
         return $category;
@@ -73,7 +74,8 @@ class CategoryManager
     {
         // @Todo Make the create method
         //       Find the category and delete it
-        $em->remove($id);
-        $em->flush();
+        $category = $this->em->getRepository(Category::class)->find($id);
+        $this->em->remove($category);
+        $this->em->flush();
     }
 }

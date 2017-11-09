@@ -50,7 +50,7 @@ class HookExtension extends Twig_Extension
         //       3. Load modules
         $module = $this->getDoctrine()->getRepository(Module::class);
         //       4. Sort them using hook modules position
-        
+
         //       5. Render each module view
         //       6. Return HTML
     }

@@ -2,6 +2,7 @@
 
 namespace ModuleBundle\Service;
 
+use ModuleBundle\Entity\Module;
 use TemplateBundle\Service\TemplateManager;
 use ConfigBundle\Service\ConfigurationManager;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -68,6 +69,15 @@ class ModuleManager
     {
         // @todo Make the activate method
         //       Find the module and update its value
+        $module = $em->getRepository(Module::class)->find($module_name);
+        if (!$module) {
+            throw $this->createNotFoundException(
+                'No module found for module'.$module_name
+            );
+        }
+
+        $module->setActive(1);
+        $em->flush();
 
         return true;
     }
@@ -82,6 +92,15 @@ class ModuleManager
     {
         // @todo Make the deactivate method
         //       Find the module and update its value
+        $module = $em->getRepository(Module::class)->find($module_name);
+        if (!$module) {
+            throw $this->createNotFoundException(
+                'No module found for module'.$module_name
+            );
+        }
+
+        $module->setActive(0);
+        $em->flush();
 
         return true;
     }

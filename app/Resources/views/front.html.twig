@@ -9,12 +9,14 @@
         <link rel="stylesheet" href="{{ path('front_template_stylesheets') }}" />
 
         {{ hook("header", __PAGE__) }}
+        hook header <br>
 
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body class="page_{{ __PAGE__ }}">
         <!-- BEGIN PAGE HEADER -->
         {{ hook("displayHeader", __PAGE__) }}
+        hook body
         <!-- END PAGE HEADER -->
 
         <!-- BEGIN PAGE CONTENT -->

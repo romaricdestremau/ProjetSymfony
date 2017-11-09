@@ -2,6 +2,9 @@
 
 namespace HookBundle\Twig;
 
+use HookBundle\Entity\Hook;
+use HookBundle\Entity\HookModule;
+use ModuleBundle\Entity\Module;
 use Twig_Extension;
 use Twig_Environment;
 use Twig_SimpleFunction;
@@ -41,9 +44,13 @@ class HookExtension extends Twig_Extension
     {
         // @todo Make the hook function
         //       1. Load hook from DB
+        $hook = $this->getDoctrine()->getRepository(Hook::class);
         //       2. Load modules ID registered with the hook
+        $hookmodule = $this->getDoctrine()->getRepository(HookModule::class);
         //       3. Load modules
+        $module = $this->getDoctrine()->getRepository(Module::class);
         //       4. Sort them using hook modules position
+        
         //       5. Render each module view
         //       6. Return HTML
     }

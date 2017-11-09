@@ -44,15 +44,44 @@ class HookExtension extends Twig_Extension
     {
         // @todo Make the hook function
         //       1. Load hook from DB
-        $hook = $this->getDoctrine()->getRepository(Hook::class);
+        /** @var Hook $hook */
+        $hook = $this->em->getRepository(Hook::class)->findOneBy(array('name' => $hook_name));
         //       2. Load modules ID registered with the hook
-        $hookmodule = $this->getDoctrine()->getRepository(HookModule::class);
-        //       3. Load modules
-        $module = $this->getDoctrine()->getRepository(Module::class);
-        //       4. Sort them using hook modules position
 
+        /** @var HookModule $hookmodule */
+        $hookmodules = $this->em->getRepository(HookModule::class)->findBy(array('idHook' => $hook->getId()),array('position' => 'ASC'));
+        //       3. Load modules
+
+        $modules = [];
+        foreach ($hookmodules as $hookmodule) {
+            $module = $this->em->getRepository(Module::class)->find($hookmodule->getIdModule());
+            $modules[] = $module;
+        }
+
+      /*  $this->em->getRepository(Module::class)->createQueryBuilder('module')
+            ->innerJoin(HookModule::class, 'hookmodule', 'ON', 'hookmodule.idModule = module.id')
+            ->where('hookmodule.idHook = :id')
+            ->setParameter('id', $hook->getId())
+            ->addOrderBy('hookmodule.position', 'ASC')
+            ->getQuery()->getResult();
+      */
+
+
+
+
+
+        //       4. Sort them using hook modules position
+        //Already sorted
         //       5. Render each module view
+        // Quel html est à afficher.
+        $render = '';
+        foreach ($modules as $module) {
+            /** @var Module $module */
+            $render.=$module->getName();
+            $render.=PHP_EOL;
+        }
         //       6. Return HTML
+        return $render;
     }
 
     public function getName()

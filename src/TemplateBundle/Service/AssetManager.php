@@ -46,6 +46,21 @@ class AssetManager
     {
         // @todo Find local stylesheets and return them
         // @tips Use the Finder class
+
+        //ajout d'un composent Finder
+        $finder = new Finder();
+        $finder->files()->in(C:\wamp64\www\ProjetSymfony\src\TemplateBundle\Resources\public\css);
+
+        //creation de l'array
+        $myArray= array();
+
+
+        foreach ($finder as $file) {
+        array_push($finder);
+        }
+
+        return $myAarray;
+
     }
 
     /**

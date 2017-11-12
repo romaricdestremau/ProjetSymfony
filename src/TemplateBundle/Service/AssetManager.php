@@ -118,6 +118,24 @@ class AssetManager
     {
         // @todo Find local javascripts and return them
         // @tips Use the Finder class
+
+        //ajout d'un composent Finder
+        $finder = new Finder();
+        $finder->files()->in($local_javascripts);
+
+        //creation de l'array
+        $myArray= array();
+
+
+        foreach ($finder as $file) {
+        array_push($finder);
+        }
+
+        return $myArray;
+
+
+
+
     }
 
     /**

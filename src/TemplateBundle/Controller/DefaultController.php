@@ -24,6 +24,9 @@ class DefaultController extends Controller
     {
         // @todo Make stylesheets action
         //       Load all stylesheet files and return them in a response
+
+        return filenameAction('C:\wamp64\www\ProjetSymfony\src\TemplateBundle\Resources\public\css\0-bootstrap.min.css');
+      
     }
 
     /**

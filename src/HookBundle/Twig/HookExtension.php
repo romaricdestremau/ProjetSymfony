@@ -67,29 +67,23 @@ class HookExtension extends Twig_Extension
       */
 
 
-
-
-
         //       4. Sort them using hook modules position
         //Already sorted
 
 
-
         //       5. Render each module view
-        $render = '';
-        $myArray = array();
+        //$load = $this->mm->load($modules);
+        //$functionrender = "hook_" . $hook_name; //fonction contenue dans le php des templates pour appeler le twig
+        $render = '';   //string contenant le html des module du hook concerné
         foreach ($modules as $module) {
             /** @var Module $module */
-            //$file = '@Template/default/modules/' . $module->getName() . '/' . $module->getName() . '.php';
-            //echo($file);
-
-            //$myArray = hook_displayHeader();
-            //$render .= $env->render($myArray);
+            $this->mm->activate($module->getName());
+            //$render .= $env->render($load->$functionrender()); //retourne un array avec template et parametre
 
 
             //on récupère le twig directe
             //$file = '@Template/default/modules/' . $module->getName() . '/' . $module->getName() . '.html.twig';
-            //$render.= $env->render($file); //render -> reconnait pas les variables
+            //$render.= $env->render($file); //render -> erreur: reconnait pas les variables
 
             $file = '../templates/default/modules/' . $module->getName() . '/' . $module->getName() . '.html.twig';
             $render.= file_get_contents($file); //affichage pur -> affiche les focntions en clair

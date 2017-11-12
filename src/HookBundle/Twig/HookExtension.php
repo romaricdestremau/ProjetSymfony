@@ -72,14 +72,20 @@ class HookExtension extends Twig_Extension
 
         //       4. Sort them using hook modules position
         //Already sorted
+
+
+
         //       5. Render each module view
-        // Quel html est à afficher.
         $render = '';
         foreach ($modules as $module) {
             /** @var Module $module */
-            $render.=$module->getName();
-            $render.=PHP_EOL;
+            $file = '../templates/default/modules/' . $module->getName() . '/' . $module->getName() . '.html.twig';
+            $render.= file_get_contents($file);
+            //$render.= file_get_contents('C:\wamp64\www\ProjetSymfony\templates\default\modules\front_article\front_article.php');
+
+            //'../../../templates/default/modules/' . $module->getName() . '/' . $module->getName() . '.php'
         }
+
         //       6. Return HTML
         return $render;
     }

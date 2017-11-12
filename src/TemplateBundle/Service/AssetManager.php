@@ -47,10 +47,17 @@ class AssetManager
         // @todo Find local stylesheets and return them
         // @tips Use the Finder class
 
-        //ajout d'un composent Finder
+        // on crée un composent Finder
         $finder = new Finder();
-        $finder->files()->in($this->$local_stylesheets);
-        return iterator_to_array($finder);
+        // on cherche les fichiers présents dans le chemin
+        $finder->files()->in($this->local_stylesheets);
+        // creation d'un array_merge
+        $myArray = array();
+        // on parcourt les fichiers trouvés
+        foreach ($finder as $file) {
+          $myArray[] = $file->getRealPath();
+        }
+        return $myArray;
     }
 
     /**
@@ -63,10 +70,17 @@ class AssetManager
         // @todo Find template stylesheets and return them
         // @tips Use the Finder class
 
+        // on crée un composent Finder
         $finder = new Finder();
+        // on cherche les fichiers présents dans le chemin
         $finder->files()->in($this->getTemplateStylesheetsPath());
-        return iterator_to_array($finder);
-
+        // creation d'un array_merge
+        $myArray = array();
+        // on parcourt les fichiers trouvés
+        foreach ($finder as $file) {
+          $myArray[] = $file->getRealPath();
+        }
+        return $myArray;
     }
 
     public function getStylesheets()
@@ -97,9 +111,18 @@ class AssetManager
         // @todo Find local javascripts and return them
         // @tips Use the Finder class
 
+        // on crée un composent Finder
         $finder = new Finder();
-        $finder->files()->in($this->$local_javascripts);
-        return iterator_to_array($finder);
+        // on cherche les fichiers présents dans le chemin
+        $finder->files()->in($this->local_javascripts);
+        // creation d'un array_merge
+        $myArray = array();
+        // on parcourt les fichiers trouvés
+        foreach ($finder as $file) {
+          $myArray[] = $file->getRealPath();
+        }
+        return $myArray;
+
 
     }
 
@@ -113,9 +136,18 @@ class AssetManager
         // @todo Find template javascripts and return them
         // @tips Use the Finder class
 
+        // on crée un composent Finder
         $finder = new Finder();
+        // on cherche les fichiers présents dans le chemin
         $finder->files()->in($this->getTemplateJavascriptsPath());
-        return iterator_to_array($finder);
+        // creation d'un array_merge
+        $myArray = array();
+        // on parcourt les fichiers trouvés
+        foreach ($finder as $file) {
+          $myArray[] = $file->getRealPath();
+        }
+        return $myArray;
+
     }
 
     public function getJavascripts()

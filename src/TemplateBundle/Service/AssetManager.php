@@ -49,18 +49,8 @@ class AssetManager
 
         //ajout d'un composent Finder
         $finder = new Finder();
-        $finder->files()->in($local_stylesheets);
-
-        //creation de l'array
-        $myArray= array();
-
-
-        foreach ($finder as $file) {
-        array_push($finder);
-        }
-
-        return $myArray;
-
+        $finder->files()->in($this->$local_stylesheets);
+        return iterator_to_array($finder);
     }
 
     /**
@@ -73,22 +63,10 @@ class AssetManager
         // @todo Find template stylesheets and return them
         // @tips Use the Finder class
 
-        // récuperation du path des template stylesheets
-        $path = getTemplateStylesheetsPath();
-
-        //ajout d'un composent Finder
         $finder = new Finder();
-        $finder->files()->in($path);
+        $finder->files()->in($this->getTemplateStylesheetsPath());
+        return iterator_to_array($finder);
 
-        //creation de l'array
-        $myArray= array();
-
-
-        foreach ($finder as $file) {
-        array_push($finder);
-        }
-
-        return $myArray;
     }
 
     public function getStylesheets()
@@ -119,19 +97,9 @@ class AssetManager
         // @todo Find local javascripts and return them
         // @tips Use the Finder class
 
-        //ajout d'un composent Finder
         $finder = new Finder();
-        $finder->files()->in($local_javascripts);
-
-        //creation de l'array
-        $myArray= array();
-
-
-        foreach ($finder as $file) {
-        array_push($finder);
-        }
-
-        return $myArray;
+        $finder->files()->in($this->$local_javascripts);
+        return iterator_to_array($finder);
 
     }
 
@@ -145,22 +113,9 @@ class AssetManager
         // @todo Find template javascripts and return them
         // @tips Use the Finder class
 
-        // récuperation du path des template stylesheets
-        $path = getTemplateJavascriptsPath();
-
-        //ajout d'un composent Finder
         $finder = new Finder();
-        $finder->files()->in($path);
-
-        //creation de l'array
-        $myArray= array();
-
-
-        foreach ($finder as $file) {
-        array_push($finder);
-        }
-
-        return $myArray;
+        $finder->files()->in($this->getTemplateJavascriptsPath());
+        return iterator_to_array($finder);
     }
 
     public function getJavascripts()

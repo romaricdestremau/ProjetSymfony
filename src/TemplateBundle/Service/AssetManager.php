@@ -74,7 +74,7 @@ class AssetManager
         // @tips Use the Finder class
 
         // récuperation du path des template stylesheets
-        $path = getTemplateJavascriptsPath();
+        $path = getTemplateStylesheetsPath();
 
         //ajout d'un composent Finder
         $finder = new Finder();
@@ -133,9 +133,6 @@ class AssetManager
 
         return $myArray;
 
-
-
-
     }
 
     /**
@@ -147,6 +144,23 @@ class AssetManager
     {
         // @todo Find template javascripts and return them
         // @tips Use the Finder class
+
+        // récuperation du path des template stylesheets
+        $path = getTemplateJavascriptsPath();
+
+        //ajout d'un composent Finder
+        $finder = new Finder();
+        $finder->files()->in($path);
+
+        //creation de l'array
+        $myArray= array();
+
+
+        foreach ($finder as $file) {
+        array_push($finder);
+        }
+
+        return $myArray;
     }
 
     public function getJavascripts()

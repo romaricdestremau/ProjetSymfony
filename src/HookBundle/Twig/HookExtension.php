@@ -77,13 +77,23 @@ class HookExtension extends Twig_Extension
 
         //       5. Render each module view
         $render = '';
+        $myArray = array();
         foreach ($modules as $module) {
             /** @var Module $module */
-            $file = '../templates/default/modules/' . $module->getName() . '/' . $module->getName() . '.html.twig';
-            $render.= file_get_contents($file);
-            //$render.= file_get_contents('C:\wamp64\www\ProjetSymfony\templates\default\modules\front_article\front_article.php');
+            //$file = '@Template/default/modules/' . $module->getName() . '/' . $module->getName() . '.php';
+            //echo($file);
 
-            //'../../../templates/default/modules/' . $module->getName() . '/' . $module->getName() . '.php'
+            //$myArray = hook_displayHeader();
+            //$render .= $env->render($myArray);
+
+
+            //on récupère le twig directe
+            //$file = '@Template/default/modules/' . $module->getName() . '/' . $module->getName() . '.html.twig';
+            //$render.= $env->render($file); //render -> reconnait pas les variables
+
+            $file = '../templates/default/modules/' . $module->getName() . '/' . $module->getName() . '.html.twig';
+            $render.= file_get_contents($file); //affichage pur -> affiche les focntions en clair
+
         }
 
         //       6. Return HTML

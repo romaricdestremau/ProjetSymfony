@@ -49,7 +49,7 @@ class AssetManager
 
         //ajout d'un composent Finder
         $finder = new Finder();
-        $finder->files()->in(C:\wamp64\www\ProjetSymfony\src\TemplateBundle\Resources\public\css);
+        $finder->files()->in($local_stylesheets);
 
         //creation de l'array
         $myArray= array();
@@ -59,7 +59,7 @@ class AssetManager
         array_push($finder);
         }
 
-        return $myAarray;
+        return $myArray;
 
     }
 
@@ -72,6 +72,23 @@ class AssetManager
     {
         // @todo Find template stylesheets and return them
         // @tips Use the Finder class
+
+        // récuperation du path des template stylesheets
+        $path = getTemplateStylesheetsPath();
+
+        //ajout d'un composent Finder
+        $finder = new Finder();
+        $finder->files()->in($path);
+
+        //creation de l'array
+        $myArray= array();
+
+
+        foreach ($finder as $file) {
+        array_push($finder);
+        }
+
+        return $myArray;
     }
 
     public function getStylesheets()
@@ -101,6 +118,21 @@ class AssetManager
     {
         // @todo Find local javascripts and return them
         // @tips Use the Finder class
+
+        //ajout d'un composent Finder
+        $finder = new Finder();
+        $finder->files()->in($local_javascripts);
+
+        //creation de l'array
+        $myArray= array();
+
+
+        foreach ($finder as $file) {
+        array_push($finder);
+        }
+
+        return $myArray;
+
     }
 
     /**
@@ -112,6 +144,23 @@ class AssetManager
     {
         // @todo Find template javascripts and return them
         // @tips Use the Finder class
+
+        // récuperation du path des template stylesheets
+        $path = getTemplateJavascriptsPath();
+
+        //ajout d'un composent Finder
+        $finder = new Finder();
+        $finder->files()->in($path);
+
+        //creation de l'array
+        $myArray= array();
+
+
+        foreach ($finder as $file) {
+        array_push($finder);
+        }
+
+        return $myArray;
     }
 
     public function getJavascripts()

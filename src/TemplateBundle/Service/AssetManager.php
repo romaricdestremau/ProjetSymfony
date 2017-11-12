@@ -49,7 +49,7 @@ class AssetManager
 
         //ajout d'un composent Finder
         $finder = new Finder();
-        $finder->files()->in(C:\wamp64\www\ProjetSymfony\src\TemplateBundle\Resources\public\css);
+        $finder->files()->in($local_stylesheets);
 
         //creation de l'array
         $myArray= array();
@@ -59,7 +59,7 @@ class AssetManager
         array_push($finder);
         }
 
-        return $myAarray;
+        return $myArray;
 
     }
 
